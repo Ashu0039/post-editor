@@ -29,15 +29,25 @@ class CreatePost extends Component {
     );
   }
 
+  setCurrentCommand(mode) {
+
+    console.log("Setting current mode to --> ", mode);
+
+    document.execCommand(mode, false, "www.google.com");
+    document.querySelector("#editorContainer .editor").focus();
+    
+  }
+
   createEditor() {
 
     return (
 
       <div id="editorContainer">
         <div className="actions">
-          <div className="action non-selectable-action">B</div>
-          <div className="action non-selectable-action">I</div>
-          <div className="action non-selectable-action">U</div>
+          <div onClick={() => this.setCurrentCommand('bold')} className="action non-selectable-action">B</div>
+          <div onClick={() => this.setCurrentCommand('italic')} className="action non-selectable-action">I</div>
+          <div onClick={() => this.setCurrentCommand('underline')} className="action non-selectable-action">U</div>
+          <div onClick={() => this.setCurrentCommand('createLink')} className="action non-selectable-action">Link</div>          
         </div>
 
         <div className="editor" contentEditable="true"></div>
