@@ -1,0 +1,65 @@
+#createPost {
+    width: calc(50% - 20px);
+    padding: 10px;
+    text-align: center;
+}
+
+#createPost .non-selectable-action {
+    user-select: none;
+    cursor: pointer;
+}
+
+#createPost .create-post-btn {
+    padding: 10px;
+    font-size: 24px;
+    border-radius: 4px;
+    background: cornflowerblue;
+    color: #ffffff;
+    display: inline-block;
+}
+
+#editorContainer .actions {
+    display: flex;
+    /* justify-content: space-between; */
+    /* background: #eee; */
+    /* border-radius: 4px; */
+}
+
+#editorContainer .action {
+    padding: 5px 10px;
+    border-radius: 4px;
+    width: 25px;
+    color: #232323;
+    background: #eee;
+    margin: 0 10px;
+}
+
+#editorContainer .editor {
+    width: calc(100% - 10px);
+    height: 300px;
+    border: 1px solid black;
+    margin: 20px 0;
+    text-align: left;
+    padding: 5px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+#editorContainer .editor:focus {
+    outline: none;
+}    
+
+#editorContainer .option {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#editorContainer .option.save {
+    background: #DA4B55;
+    color: #fff;
+}    
+
+#editorContainer .option.cancel {
+    background: whitesmoke;
+    color: #616161;
+}
