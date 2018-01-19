@@ -10,7 +10,34 @@ class CreatePost extends Component {
       'editingMode' : false
     };
 
+    this.editCommands = [
+      {
+        'command' : 'bold',
+        'text' : 'B',
+        'val' : ''
+      },
+      {
+        'command' : 'italic',
+        'text' : 'I',
+        'val' : ''
+      },
+      {
+        'command' : 'underline',
+        'text' : 'U',
+        'val' : ''
+      },
+      {
+        'command' : 'createLink',
+        'text' : 'Create Link',
+        'val' : 'www.zaya.in'
+      }
+    ];
 
+
+  }
+
+  focusOnEditor() {
+    document.querySelector("#editorContainer .editor").focus();    
   }
 
   setEditMode(flag) {
@@ -19,6 +46,7 @@ class CreatePost extends Component {
       this.setState({
         'editingMode' : flag
       });
+
     }
 
   }
@@ -29,13 +57,22 @@ class CreatePost extends Component {
     );
   }
 
-  setCurrentCommand(mode) {
+  setCurrentCommand(command) {
 
-    console.log("Setting current mode to --> ", mode);
+    console.log("Setting current mode to --> ", command.command);
 
-    document.execCommand(mode, false, "www.google.com");
-    document.querySelector("#editorContainer .editor").focus();
+    document.execCommand(command.command, false, command.val || "");
+
+    this.focusOnEditor();    
     
+  }
+
+  getActions() {
+
+    return this.editCommands.map((command) => {
+      return <div key={command.command} onClick={() => this.setCurrentCommand(command)} className="action non-selectable-action">{command.text}</div>      
+    });
+
   }
 
   createEditor() {
@@ -44,10 +81,7 @@ class CreatePost extends Component {
 
       <div id="editorContainer">
         <div className="actions">
-          <div onClick={() => this.setCurrentCommand('bold')} className="action non-selectable-action">B</div>
-          <div onClick={() => this.setCurrentCommand('italic')} className="action non-selectable-action">I</div>
-          <div onClick={() => this.setCurrentCommand('underline')} className="action non-selectable-action">U</div>
-          <div onClick={() => this.setCurrentCommand('createLink')} className="action non-selectable-action">Link</div>          
+          { this.getActions() }
         </div>
 
         <div className="editor" contentEditable="true"></div>
