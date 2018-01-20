@@ -10,6 +10,9 @@ class CreatePost extends Component {
       'editingMode' : false
     };
 
+    console.log("Received props --> ", this.props);
+    
+
     this.editCommands = [
       {
         'command' : 'bold',
@@ -98,9 +101,14 @@ class CreatePost extends Component {
 
   savePost() {
 
-    let htmlContent = document.querySelector("#editorContainer .editor").innerHTML;
+    let htmlContent = "<div>" + document.querySelector("#editorContainer .editor").innerHTML + "</div>";
 
-    this.props.createNewPost(htmlContent);
+    let newPost = {
+      'title' : 'New Post',
+      'content' : htmlContent
+    }
+
+    this.props.createNewPost(newPost);
 
   }
 
