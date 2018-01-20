@@ -87,12 +87,20 @@ class CreatePost extends Component {
         <div className="editor" contentEditable="true"></div>
 
         <div className="options">
-          <div className="option save non-selectable-action">Save</div>
+          <div className="option save non-selectable-action" onClick={() => this.savePost()}>Save</div>
           <div className="option cancel non-selectable-action" onClick={() => this.setEditMode(false)}>Cancel</div>
         </div>
       </div>
 
     );
+
+  }
+
+  savePost() {
+
+    let htmlContent = document.querySelector("#editorContainer .editor").innerHTML;
+
+    this.props.createNewPost(htmlContent);
 
   }
 

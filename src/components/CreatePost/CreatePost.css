@@ -48,6 +48,11 @@
     outline: none;
 }    
 
+#editorContainer .options {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #editorContainer .option {
     padding: 10px;
     border-radius: 5px;
