@@ -16,8 +16,21 @@ class App extends Component {
       'dragging' : false,
       'previewing' : false,
       'postInPreview' : null,
-      'editingPost' : null
+      'editingPost' : null,
+      'editingMode' : false
     };
+  }
+
+  setEditMode(flag) {
+    this.setState({
+      editingMode : flag
+    });
+
+    if(!flag) {
+      this.setState({
+        editingPost : null
+      });
+    }
   }
 
   createNewPost({title, content}) {
@@ -127,7 +140,8 @@ class App extends Component {
 
     if(postToEdit) {
       this.setState({
-        editingPost : postToEdit
+        editingPost : postToEdit,
+        editingMode : true
       });
     }
 
@@ -176,7 +190,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" onDrop={(e) => this.handleDrop(e)} onDragOver={(e) => this.dragOver(e)} onDragEnd={(e) => this.dragEnd(e)}>
-        <CreatePost ref={instance => { this.createPost = instance; }} editingPost={this.state.editingPost} updatePost={this.updatePost.bind(this)} dragging={this.state.dragging} createNewPost={this.createNewPost.bind(this)} />
+        <CreatePost ref={instance => { this.createPost = instance; }} showEditor={this.state.editingMode} setEditMode={this.setEditMode.bind(this)} editingPost={this.state.editingPost} updatePost={this.updatePost.bind(this)} dragging={this.state.dragging} createNewPost={this.createNewPost.bind(this)} />
         <PostList editPost={this.editPost.bind(this)} previewPost={this.previewPost.bind(this)} deletePost={this.deletePost.bind(this)} posts={this.state.posts} />
         <PostPreview previewing={this.state.previewing} post={this.state.postInPreview} closePreview={this.closePreview.bind(this)} />
       </div>

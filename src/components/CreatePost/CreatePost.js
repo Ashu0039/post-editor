@@ -45,10 +45,7 @@ class CreatePost extends Component {
   setEditMode(flag) {
 
     if (typeof flag === "boolean") {
-      this.setState({
-        'editingMode' : flag
-      });
-
+      this.props.setEditMode(flag);
     }
 
   }
@@ -172,28 +169,31 @@ class CreatePost extends Component {
 
   getEditorStateTemplate() {
 
-    return this.state.editingMode ? this.getEditorTemplate() : this.createNewPostButton();
+    return this.props.showEditor ? this.getEditorTemplate() : this.createNewPostButton();
 
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("Received props for editor --> ", nextProps);
+    // console.log("Received props for editor --> ", nextProps);
 
-    let postToEdit = nextProps.editingPost;    
+    // let postToEdit = nextProps.editingPost;    
 
-    if(postToEdit) {
-      this.setState({
-        editingMode : true
-      });
+    // if(postToEdit || nextProps.) {
+    //   this.setState({
+    //     editingMode : true
+    //   });
 
-    }
+    // }
+    
+
+
   }
 
   componentDidUpdate() {
 
-    console.log("Editing mode --> ", this.state.editingMode, " editing post --> ", this.props.editingPost);
+    console.log("Editing mode --> ", this.props.showEditor, " editing post --> ", this.props.editingPost);
 
-    if(this.state.editingMode && this.props.editingPost) {
+    if(this.props.showEditor && this.props.editingPost) {
       
       let postToEdit = this.props.editingPost;
 
