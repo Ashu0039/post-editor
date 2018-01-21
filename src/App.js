@@ -123,6 +123,24 @@ class App extends Component {
 
   }
 
+  deletePost(postId) {
+
+    const posts = this.state.posts;
+    
+    const pos = posts.findIndex((post) => post.id === postId);
+
+    if (pos > -1) {
+      
+      let newPosts = [...posts.slice(0, pos), ...posts.slice(pos+1)];
+
+      this.setState({
+        posts : newPosts
+      });
+
+    }
+
+  }
+
   closePreview() {
     this.setState({
       previewing : false,
@@ -134,7 +152,7 @@ class App extends Component {
     return (
       <div className="App" onDrop={(e) => this.handleDrop(e)} onDragOver={(e) => this.dragOver(e)} onDragEnd={(e) => this.dragEnd(e)}>
         <CreatePost ref={instance => { this.createPost = instance; }} dragging={this.state.dragging} createNewPost={this.createNewPost.bind(this)} />
-        <PostList editPost={this.editPost.bind(this)} previewPost={this.previewPost.bind(this)} posts={this.state.posts} />
+        <PostList editPost={this.editPost.bind(this)} previewPost={this.previewPost.bind(this)} deletePost={this.deletePost.bind(this)} posts={this.state.posts} />
         <PostPreview previewing={this.state.previewing} post={this.state.postInPreview} closePreview={this.closePreview.bind(this)} />
       </div>
     );

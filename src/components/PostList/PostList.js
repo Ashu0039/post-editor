@@ -12,6 +12,10 @@ class PostList extends Component {
     this.props.previewPost(postId);
   }
 
+  deletePost(postId) {
+    this.props.deletePost(postId);
+  }
+
   getAllPosts() {
 
     return this.props.posts.map((post) => {
@@ -21,6 +25,7 @@ class PostList extends Component {
         <div className="actions">
           <span onClick={() => this.editPost(post._id)}>Edit</span>
           <span onClick={() => this.previewPost(post._id)}>Preview</span>
+          <span onClick={() => this.deletePost(post._id)}>Delete</span>
         </div>
       </div>;
 
