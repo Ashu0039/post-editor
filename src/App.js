@@ -4,6 +4,7 @@ import './App.css';
 // Import Components
 import CreatePost from './components/CreatePost/CreatePost';
 import PostList from './components/PostList/PostList';
+import PostPreview from './components/PostPreview/PostPreview';
 
 class App extends Component {
 
@@ -12,7 +13,9 @@ class App extends Component {
 
     this.state = {
       'posts' : [],
-      'dragging' : false
+      'dragging' : false,
+      'previewing' : false,
+      'postInPreview' : null
     };
   }
 
@@ -83,23 +86,56 @@ class App extends Component {
     console.log("Drag ENDED.. --> ");    
   }
 
+  findPost(postId) {
+
+    const posts = this.state.posts;
+
+    const pos = posts.findIndex((post) => post.id === postId);
+
+    if (pos > -1) {
+      return posts[pos];
+    } else {
+      return null;
+    }
+
+  }
+
   editPost(postId) {
 
     console.log("Edit post with id --> ", postId);
+
+    // let postToEdit = this.findPost(postId);
 
   }
 
   previewPost(postId) {
 
-    console.log("Preview post with id --> ", postId);
+    console.log("Preview post with id --> ", postId, this);
 
+    let postToPreview = this.findPost(postId);
+
+    if (postToPreview) {
+      this.setState({
+        previewing : true,
+        postInPreview : postToPreview
+      });
+    }
+
+  }
+
+  closePreview() {
+    this.setState({
+      previewing : false,
+      postInPreview : null
+    });
   }
 
   render() {
     return (
       <div className="App" onDrop={(e) => this.handleDrop(e)} onDragOver={(e) => this.dragOver(e)} onDragEnd={(e) => this.dragEnd(e)}>
         <CreatePost ref={instance => { this.createPost = instance; }} dragging={this.state.dragging} createNewPost={this.createNewPost.bind(this)} />
-        <PostList editPost={this.editPost} previewPost={this.previewPost} posts={this.state.posts} />
+        <PostList editPost={this.editPost.bind(this)} previewPost={this.previewPost.bind(this)} posts={this.state.posts} />
+        <PostPreview previewing={this.state.previewing} post={this.state.postInPreview} closePreview={this.closePreview.bind(this)} />
       </div>
     );
   }

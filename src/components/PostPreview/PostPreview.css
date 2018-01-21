@@ -1,0 +1,32 @@
+#postPreview {
+    position: absolute;
+    width: calc(100% - 100px);
+    height: calc(100% - 100px);
+    left: 0;
+    top: 0;
+    padding: 50px;
+    background: rgba(0,0,0,0.2);
+}
+
+#postPreview.show {
+    display: block;
+}
+
+#postPreview.hide {
+    display: none;
+}
+
+#postPreview .preview-section {
+    height: 100%;
+    width: 100%;
+    background: white;
+}
+
+#postPreview span {
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    font-size: 24px;
+    top: 24px;
+    right: 50px;
+}
