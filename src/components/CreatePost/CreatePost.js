@@ -101,7 +101,7 @@ class CreatePost extends Component {
   getDraggingTemplate() {
     return (
       <div id="dropZone">
-        Drop here
+        Drop Images here
       </div>
     );
   }
@@ -163,12 +163,13 @@ class CreatePost extends Component {
 
     // const templateToRender = this.state.editingMode ? this.createEditor() : this.createNewPostButton();
 
-    const templateToRender = this.props.dragging ? this.getDraggingTemplate() : this.getEditorStateTemplate();
+    const templateToRender = this.getEditorStateTemplate();
 
     return (
-      <div id="createPost">
+      <div id="createPost" className={this.props.dragging ? 'drag-zone' : ''}>
         
         {templateToRender}
+        {this.props.dragging ? this.getDraggingTemplate() : ''}
 
       </div>
     );
