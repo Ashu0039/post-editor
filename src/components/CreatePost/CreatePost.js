@@ -98,7 +98,7 @@ class CreatePost extends Component {
 
   getDraggingTemplate() {
     return (
-      <div>
+      <div id="dropZone">
         Drop here
       </div>
     );

@@ -82,20 +82,28 @@ class App extends Component {
     e.preventDefault();    
     console.log("Dragging.. --> ");
 
-    if (!this.state.dragging) {
+    clearTimeout(this.draggingTimeout);    
 
-      clearTimeout(this.draggingTimeout);
+    if (!this.state.dragging) {
 
       this.setState({
         dragging : true
       });
 
-      this.draggingTimeout = setTimeout(() => {
+    }
+
+    this.draggingTimeout = setTimeout(() => {
+
+      if (this.state.dragging) {
+        
         this.setState({
           dragging : false
         });
-      }, 500);
-    }
+
+      }
+
+      
+    }, 500);
 
   }
 

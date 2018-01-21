@@ -67,3 +67,12 @@
     background: whitesmoke;
     color: #616161;
 }
+
+#dropZone {
+    border: 2px dashed lightblue;
+    padding: 20px;
+    height: 200px;
+    text-align: center;
+    line-height: 200px;
+    font-size: 24px;
+}
