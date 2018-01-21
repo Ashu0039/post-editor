@@ -106,9 +106,17 @@ class CreatePost extends Component {
     );
   }
 
+  getInnerHTMLOfEditor() {
+    return document.querySelector("#editorContainer .editor").innerHTML;
+  }
+
+  setInnerHTMLOfEditor(html) {
+    document.querySelector("#editorContainer .editor").innerHTML = html;
+  }
+
   savePost() {
 
-    let htmlContent = "<div>" + document.querySelector("#editorContainer .editor").innerHTML + "</div>";
+    let htmlContent = "<div>" + this.getInnerHTMLOfEditor() + "</div>";
 
     let newPost = {
       'title' : 'New Post',
@@ -116,6 +124,10 @@ class CreatePost extends Component {
     }
 
     this.props.createNewPost(newPost);
+
+    this.setState({
+      editingMode : false
+    });
 
   }
 
