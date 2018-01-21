@@ -77,10 +77,9 @@ class CreatePost extends Component {
 
   }
 
-  createEditor() {
-
+  getEditorTemplate() {
     return (
-
+      
       <div id="editorContainer">
         <div className="actions">
           { this.getActions() }
@@ -95,6 +94,27 @@ class CreatePost extends Component {
       </div>
 
     );
+  }
+
+  getDraggingTemplate() {
+    return (
+      <div>
+        Drop here
+      </div>
+    );
+  }
+
+  createEditor() {
+
+    let editorStateToShow;
+
+    if(this.props.dragging) {
+      editorStateToShow = this.getDraggingTemplate();
+    } else {
+      editorStateToShow = this.getEditorTemplate();
+    }
+
+    return editorStateToShow;
 
   }
 
