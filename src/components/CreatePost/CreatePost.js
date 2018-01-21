@@ -103,15 +103,15 @@ class CreatePost extends Component {
 
   createEditor() {
 
-    let editorStateToShow;
+    // let editorStateToShow;
 
-    if(this.props.dragging) {
-      editorStateToShow = this.getDraggingTemplate();
-    } else {
-      editorStateToShow = this.getEditorTemplate();
-    }
+    // if(this.props.dragging) {
+    //   editorStateToShow = this.getDraggingTemplate();
+    // } else {
+    //   editorStateToShow = this.getEditorTemplate();
+    // }
 
-    return editorStateToShow;
+    // return editorStateToShow;
 
   }
 
@@ -130,11 +130,40 @@ class CreatePost extends Component {
 
   droppedFiles(files) {
     console.log("Dropped files --> ", files);
+
+    if (!this.state.editingMode) {
+      this.setState({
+        editingMode : true
+      });
+    }
+
+    let reader  = new FileReader();
+
+    let file = files[0];
+
+    reader.addEventListener("load", function () {
+
+      // console.log("Got file url --> ", reader.result);
+
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+
+  }
+
+  getEditorStateTemplate() {
+
+    return this.state.editingMode ? this.getEditorTemplate() : this.createNewPostButton();
+
   }
 
   render() {
 
-    const templateToRender = this.state.editingMode ? this.createEditor() : this.createNewPostButton();
+    // const templateToRender = this.state.editingMode ? this.createEditor() : this.createNewPostButton();
+
+    const templateToRender = this.props.dragging ? this.getDraggingTemplate() : this.getEditorStateTemplate();
 
     return (
       <div id="createPost">
