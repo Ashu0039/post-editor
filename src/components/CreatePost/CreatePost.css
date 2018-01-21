@@ -41,7 +41,6 @@
     text-align: left;
     padding: 5px;
     overflow: auto;
-    overflow-x: hidden;
 }
 
 #editorContainer .editor:focus {

@@ -27,6 +27,11 @@ class CreatePost extends Component {
         'command' : 'createLink',
         'text' : 'Create Link',
         'val' : 'www.zaya.in'
+      },
+      {
+        'command' : 'insertImage',
+        'text' : 'Insert Image',
+        'val' : 'https://dummyimage.com/240x180/000/fff.png&text=image'
       }
     ];
 
@@ -101,20 +106,6 @@ class CreatePost extends Component {
     );
   }
 
-  createEditor() {
-
-    // let editorStateToShow;
-
-    // if(this.props.dragging) {
-    //   editorStateToShow = this.getDraggingTemplate();
-    // } else {
-    //   editorStateToShow = this.getEditorTemplate();
-    // }
-
-    // return editorStateToShow;
-
-  }
-
   savePost() {
 
     let htmlContent = "<div>" + document.querySelector("#editorContainer .editor").innerHTML + "</div>";
@@ -137,19 +128,33 @@ class CreatePost extends Component {
       });
     }
 
-    let reader  = new FileReader();
+    // let reader  = new FileReader();
 
     let file = files[0];
 
-    reader.addEventListener("load", function () {
+    let url = URL.createObjectURL(file);
 
-      // console.log("Got file url --> ", reader.result);
+    console.log("Created url for file --> ", url);
 
-    }, false);
 
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    setTimeout(() => {
+      this.focusOnEditor();
+      document.execCommand("insertImage", false, url);            
+    }, 1000);
+
+
+
+    // reader.addEventListener("load", function () {
+
+    //   // console.log("Got file url --> ", reader.result);
+
+    //   document.execCommand("insertImage", false, reader.result || "");      
+
+    // }, false);
+
+    // if (file && file.type.indexOf("image") > -1) {
+    //   reader.readAsDataURL(file);
+    // }
 
   }
 
