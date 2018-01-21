@@ -83,11 +83,23 @@ class App extends Component {
     console.log("Drag ENDED.. --> ");    
   }
 
+  editPost(postId) {
+
+    console.log("Edit post with id --> ", postId);
+
+  }
+
+  previewPost(postId) {
+
+    console.log("Preview post with id --> ", postId);
+
+  }
+
   render() {
     return (
       <div className="App" onDrop={(e) => this.handleDrop(e)} onDragOver={(e) => this.dragOver(e)} onDragEnd={(e) => this.dragEnd(e)}>
         <CreatePost ref={instance => { this.createPost = instance; }} dragging={this.state.dragging} createNewPost={this.createNewPost.bind(this)} />
-        <PostList posts={this.state.posts} />
+        <PostList editPost={this.editPost} previewPost={this.previewPost} posts={this.state.posts} />
       </div>
     );
   }

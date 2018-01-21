@@ -7,22 +7,36 @@
 }
 
 #postList .post {
-    cursor: pointer;
+    user-select: none;
+    background: lightsteelblue;
+    padding: 10px;
+    border-radius: 3px;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    margin: 15px 5px;
+    display: flex;
+}
+
+#postList .post .title {
+    color: darkblue;
     font-size: 18px;
     overflow: hidden;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
-    user-select: none;
-    background: lightsteelblue;
-    padding: 10px;
-    border-radius: 3px;
-    color: darkblue;
-    font-weight: lighter;
-    letter-spacing: 1px;
-    margin: 15px 5px;
+    width: 80%;
 }
 
-#postList .post p {
-    margin: 0;
-}
+#postList .post .actions {
+    display: flex;
+}    
+
+#postList .post .actions span {
+    color: #fff;
+    padding: 3px;
+    font-size: 14px;
+    border: 1px solid #f9dede;
+    border-radius: 2px;
+    margin: 0 5px;
+    cursor: pointer;
+}    
