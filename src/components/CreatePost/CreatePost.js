@@ -83,6 +83,9 @@ class CreatePost extends Component {
     return (
       
       <div id="editorContainer">
+        <div className="post-title">
+          <input placeholder="Title for your post.." />
+        </div>
         <div className="actions">
           { this.getActions() }
         </div>
@@ -117,9 +120,10 @@ class CreatePost extends Component {
   savePost() {
 
     let htmlContent = "<div>" + this.getInnerHTMLOfEditor() + "</div>";
+    let postTitle = document.querySelector("#editorContainer .post-title input").value;
 
     let newPost = {
-      'title' : 'New Post',
+      'title' : postTitle ? postTitle : 'New Post - ' + new Date().getTime(),
       'content' : htmlContent
     }
 
