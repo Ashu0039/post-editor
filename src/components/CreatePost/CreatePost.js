@@ -140,33 +140,16 @@ class CreatePost extends Component {
       });
     }
 
-    // let reader  = new FileReader();
+    let filesArray = Array.from(files);
 
-    let file = files[0];
-
-    let url = URL.createObjectURL(file);
-
-    console.log("Created url for file --> ", url);
-
+    let urls = filesArray.map((file) => URL.createObjectURL(file));
 
     setTimeout(() => {
       this.focusOnEditor();
-      document.execCommand("insertImage", false, url);            
+
+      urls.forEach((url) => document.execCommand("insertImage", false, url));
+
     }, 1000);
-
-
-
-    // reader.addEventListener("load", function () {
-
-    //   // console.log("Got file url --> ", reader.result);
-
-    //   document.execCommand("insertImage", false, reader.result || "");      
-
-    // }, false);
-
-    // if (file && file.type.indexOf("image") > -1) {
-    //   reader.readAsDataURL(file);
-    // }
 
   }
 
