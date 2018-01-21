@@ -15,7 +15,8 @@ class App extends Component {
       'posts' : [],
       'dragging' : false,
       'previewing' : false,
-      'postInPreview' : null
+      'postInPreview' : null,
+      'editingPost' : null
     };
   }
 
@@ -35,6 +36,24 @@ class App extends Component {
 
       this.setState({
         'posts' : afterAddingNewPost
+      });
+
+    }
+
+  }
+
+  updatePost(postToUpdate) {
+
+    const posts = this.state.posts;
+    
+    const pos = posts.findIndex((post) => post.id === postToUpdate.id);
+
+    if(pos > -1) {
+      let newPosts = [...posts.slice(0, pos), postToUpdate, ...posts.slice(pos+1)];
+
+      this.setState({
+        posts : newPosts,
+        editingPost : null
       });
 
     }
@@ -104,7 +123,13 @@ class App extends Component {
 
     console.log("Edit post with id --> ", postId);
 
-    // let postToEdit = this.findPost(postId);
+    let postToEdit = this.findPost(postId);
+
+    if(postToEdit) {
+      this.setState({
+        editingPost : postToEdit
+      });
+    }
 
   }
 
@@ -151,7 +176,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" onDrop={(e) => this.handleDrop(e)} onDragOver={(e) => this.dragOver(e)} onDragEnd={(e) => this.dragEnd(e)}>
-        <CreatePost ref={instance => { this.createPost = instance; }} dragging={this.state.dragging} createNewPost={this.createNewPost.bind(this)} />
+        <CreatePost ref={instance => { this.createPost = instance; }} editingPost={this.state.editingPost} updatePost={this.updatePost.bind(this)} dragging={this.state.dragging} createNewPost={this.createNewPost.bind(this)} />
         <PostList editPost={this.editPost.bind(this)} previewPost={this.previewPost.bind(this)} deletePost={this.deletePost.bind(this)} posts={this.state.posts} />
         <PostPreview previewing={this.state.previewing} post={this.state.postInPreview} closePreview={this.closePreview.bind(this)} />
       </div>

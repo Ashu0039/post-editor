@@ -3,8 +3,8 @@ import './CreatePost.css';
 
 class CreatePost extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       'editingMode' : false
@@ -94,7 +94,7 @@ class CreatePost extends Component {
 
         <div className="options">
           <div className="option save non-selectable-action" onClick={() => this.savePost()}>Save</div>
-          <div className="option cancel non-selectable-action" onClick={() => this.setEditMode(false)}>Cancel</div>
+          <div className="option cancel non-selectable-action" onClick={() => this.discardPost()}>Cancel</div>
         </div>
       </div>
 
@@ -127,11 +127,26 @@ class CreatePost extends Component {
       'content' : htmlContent
     }
 
-    this.props.createNewPost(newPost);
+    let postInEdit = this.props.editingPost;    
 
-    this.setState({
-      editingMode : false
-    });
+    if(postInEdit) {
+
+      postInEdit.title = newPost.title;
+      postInEdit.content =  newPost.content;
+      this.props.updatePost(postInEdit);
+
+    } else {
+      this.props.createNewPost(newPost);      
+    }
+
+
+    this.setEditMode(false);
+
+  }
+
+  discardPost() {
+
+    this.setEditMode(false);
 
   }
 
@@ -139,9 +154,7 @@ class CreatePost extends Component {
     console.log("Dropped files --> ", files);
 
     if (!this.state.editingMode) {
-      this.setState({
-        editingMode : true
-      });
+      this.setEditMode(true);
     }
 
     let filesArray = Array.from(files);
@@ -160,6 +173,37 @@ class CreatePost extends Component {
   getEditorStateTemplate() {
 
     return this.state.editingMode ? this.getEditorTemplate() : this.createNewPostButton();
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("Received props for editor --> ", nextProps);
+
+    let postToEdit = nextProps.editingPost;    
+
+    if(postToEdit) {
+      this.setState({
+        editingMode : true
+      });
+
+    }
+  }
+
+  componentDidUpdate() {
+
+    console.log("Editing mode --> ", this.state.editingMode, " editing post --> ", this.props.editingPost);
+
+    if(this.state.editingMode && this.props.editingPost) {
+      
+      let postToEdit = this.props.editingPost;
+
+      let title = postToEdit.title;
+      let content = postToEdit.content;
+
+      document.querySelector("#editorContainer .post-title input").value = title;
+      this.setInnerHTMLOfEditor(content);
+
+    }
 
   }
 
