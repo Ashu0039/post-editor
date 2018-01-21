@@ -8,10 +8,7 @@ class CreatePost extends Component {
 
     this.state = {
       'editingMode' : false
-    };
-
-    console.log("Received props --> ", this.props);
-    
+    };    
 
     this.editCommands = [
       {
@@ -129,6 +126,10 @@ class CreatePost extends Component {
 
     this.props.createNewPost(newPost);
 
+  }
+
+  droppedFiles(files) {
+    console.log("Dropped files --> ", files);
   }
 
   render() {

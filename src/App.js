@@ -54,27 +54,8 @@ class App extends Component {
     e.preventDefault();
     var dt = e.dataTransfer;
 
-    console.log("Files dropped using datatransfer --> ", dt.files);
-    for (let i=0; i < dt.files.length; i++) {
-      console.log("... file[" + i + "].name = " + dt.files[i].name);
-    } 
+    this.createPost.droppedFiles(dt.files);
 
-
-    // if (dt.items) {
-    //   // Use DataTransferItemList interface to access the file(s)
-    //   for (let i=0; i < dt.items.length; i++) {
-    //     if (dt.items[i].kind === "file") {
-    //       var f = dt.items[i].getAsFile();
-    //       console.log("... file[" + i + "].name = " + f.name);
-    //     }
-    //   }
-    // } else {
-    //   // Use DataTransfer interface to access the file(s)
-    //   console.log("Files dropped using datatransfer --> ", dt.files);
-    //   for (let i=0; i < dt.files.length; i++) {
-    //     console.log("... file[" + i + "].name = " + dt.files[i].name);
-    //   }  
-    // }
   }
 
   dragOver(e) {
@@ -116,7 +97,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" onDrop={(e) => this.handleDrop(e)} onDragOver={(e) => this.dragOver(e)} onDragEnd={(e) => this.dragEnd(e)}>
-        <CreatePost dragging={this.state.dragging} createNewPost={this.createNewPost.bind(this)} />
+        <CreatePost ref={instance => { this.createPost = instance; }} dragging={this.state.dragging} createNewPost={this.createNewPost.bind(this)} />
         <PostList posts={this.state.posts} />
       </div>
     );
