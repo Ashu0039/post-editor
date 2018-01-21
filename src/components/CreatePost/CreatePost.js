@@ -16,18 +16,15 @@ class CreatePost extends Component {
     this.editCommands = [
       {
         'command' : 'bold',
-        'text' : 'B',
-        'val' : ''
+        'text' : 'B'
       },
       {
         'command' : 'italic',
-        'text' : 'I',
-        'val' : ''
+        'text' : 'I'
       },
       {
         'command' : 'underline',
-        'text' : 'U',
-        'val' : ''
+        'text' : 'U'
       },
       {
         'command' : 'createLink',
@@ -62,11 +59,13 @@ class CreatePost extends Component {
 
   setCurrentCommand(command) {
 
+    this.focusOnEditor();        
+
     console.log("Setting current mode to --> ", command.command);
 
-    document.execCommand(command.command, false, command.val || "");
+    let val = (typeof command.val !== "undefined") ? prompt("Value for " +command.command + "?", command.val) : "";
 
-    this.focusOnEditor();    
+    document.execCommand(command.command, false, val || "");
     
   }
 
