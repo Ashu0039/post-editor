@@ -11,18 +11,7 @@ class App extends Component {
     super();
 
     this.state = {
-      'posts' : [ 
-        {
-          '_id' : 1,
-          'title' : 'Hello',
-          'content' : 'wow'
-        },
-        {
-          '_id' : 2,
-          'title' : 'something',
-          'content' : 'sdfsf'
-        }
-      ],
+      'posts' : [],
       'dragging' : false
     };
   }

@@ -8,7 +8,7 @@ class PostList extends Component {
 
     return this.props.posts.map((post) => {
 
-      return <div key={post._id}><p>{ post.title }</p></div>;
+      return <div className="post" key={post._id}><p>{ post.title }</p></div>;
 
     });
 
@@ -20,7 +20,10 @@ class PostList extends Component {
 
     return (
       <div id="postList">
-        <h1>Here a list of all posts will come</h1>
+
+        {allPosts.length > 0 ? <h3>All Posts</h3> : <h1>Get started by creating some post!</h1>}
+
+        
         { allPosts }
       </div>
     );
