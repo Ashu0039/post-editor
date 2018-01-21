@@ -69,6 +69,8 @@ class App extends Component {
         editingPost : null
       });
 
+    } else {
+      this.addNewPost(postToUpdate);
     }
 
   }
