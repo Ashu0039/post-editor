@@ -22,10 +22,13 @@ class PostPreview extends Component {
         // const post = this.props.post;
         const previewing = this.props.previewing;
 
+        let previewTitle = this.props.post ? this.props.post.title : '';
+
         return (
 
             <div id="postPreview" className={previewing ? 'show' : 'hide'}>
                 <span onClick={() => this.props.closePreview()}>Close</span>
+                <div className="title">{previewTitle}</div>
                 <div className="preview-section"></div>
             </div>
 

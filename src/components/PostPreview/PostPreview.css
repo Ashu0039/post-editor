@@ -22,11 +22,24 @@
     background: white;
 }
 
+#postPreview .title {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    user-select: none;
+    left: 60px;
+    font-size: 36px;
+    color: black;
+    font-weight: lighter;
+    top: 4px;
+}
+
 #postPreview span {
     cursor: pointer;
     color: white;
     position: absolute;
     font-size: 24px;
-    top: 24px;
+    top: 12px;
     right: 50px;
+    user-select: none;
 }
