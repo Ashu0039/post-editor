@@ -52,8 +52,43 @@ class CreatePost extends Component {
 
   createNewPostButton() {
     return (
-      <div onClick={() => this.setEditMode(true)} className="create-post-btn non-selectable-action">Create New Post</div>
+
+      <div>
+
+        <div onClick={() => this.setEditMode(true)} className="create-post-btn non-selectable-action">Create New Post</div>
+        <span> - OR - </span>
+        <div onClick={() => this.openFilePicker()} className="create-post-btn non-selectable-action">Import a File</div>
+        <input id="fileInput" type="file" accept="text/html" onChange={(event) => this.readFiles(event)} />
+
+      </div>
+
+
     );
+  }
+
+  openFilePicker() {
+    document.getElementById("fileInput").click();
+  }
+
+  readFiles(ev) {
+
+    const file = ev.target.files[0];
+    
+    if (file) {
+      console.log("got a file --> ", file);
+        const r = new FileReader();
+
+        r.onload = function (e) {
+          const contents = e.target.result;
+          // document.getElementById("ReadResult").innerHTML = contents;
+          console.log("Got contents of file --> ", contents);
+        }
+
+        r.readAsText(file);
+    } else {
+        alert("Failed to load file");
+    }
+
   }
 
   setCurrentCommand(command) {

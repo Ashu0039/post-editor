@@ -22,6 +22,10 @@
     display: inline-block;
 }
 
+#createPost #fileInput {
+    display: none;
+}
+
 #editorContainer .post-title {
     margin: 10px;
 }
