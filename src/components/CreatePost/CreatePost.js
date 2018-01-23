@@ -81,7 +81,6 @@ class CreatePost extends Component {
 
       r.onload = (e) => {
         const contents = e.target.result;
-        // document.getElementById("ReadResult").innerHTML = contents;
         console.log("Got contents of file --> ", contents);
         this.setEditMode(true);
         this.setInnerHTMLOfEditor(contents);
