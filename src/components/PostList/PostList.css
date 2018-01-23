@@ -14,7 +14,7 @@
     font-weight: lighter;
     letter-spacing: 1px;
     margin: 15px 5px;
-    display: flex;
+    /* display: flex; */
 }
 
 #postList .post .title {
@@ -29,6 +29,7 @@
 
 #postList .post .actions {
     display: flex;
+    justify-content: space-evenly;
 }    
 
 #postList .post .actions span {

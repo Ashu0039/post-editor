@@ -30,6 +30,7 @@ class PostPreview extends Component {
                 <span onClick={() => this.props.closePreview()}>Close</span>
                 <div className="title">{previewTitle}</div>
                 <div className="preview-section"></div>
+                <div onClick={() => this.props.exportPost(this.props.post)} className="export">Export</div>
             </div>
 
         );

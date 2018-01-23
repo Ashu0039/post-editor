@@ -189,12 +189,30 @@ class App extends Component {
     });
   }
 
+  exportPost(post) {
+
+    console.log("Export this post --> ", post);
+
+    if(!post) {
+      return;
+    }
+
+    const link = document.createElement('a');
+
+    link.setAttribute('download', post.title);
+    link.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(post.content));
+    link.click(); 
+
+    this.closePreview();
+
+  }
+
   render() {
     return (
       <div className="App" onDrop={(e) => this.handleDrop(e)} onDragOver={(e) => this.dragOver(e)} onDragEnd={(e) => this.dragEnd(e)}>
         <CreatePost ref={instance => { this.createPost = instance; }} showEditor={this.state.editingMode} setEditMode={this.setEditMode.bind(this)} editingPost={this.state.editingPost} updatePost={this.updatePost.bind(this)} dragging={this.state.dragging} createNewPost={this.createNewPost.bind(this)} />
         <PostList editPost={this.editPost.bind(this)} previewPost={this.previewPost.bind(this)} deletePost={this.deletePost.bind(this)} posts={this.state.posts} />
-        <PostPreview previewing={this.state.previewing} post={this.state.postInPreview} closePreview={this.closePreview.bind(this)} />
+        <PostPreview previewing={this.state.previewing} exportPost={this.exportPost} post={this.state.postInPreview} closePreview={this.closePreview.bind(this)} />
       </div>
     );
   }
