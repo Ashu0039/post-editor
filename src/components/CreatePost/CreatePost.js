@@ -74,19 +74,22 @@ class CreatePost extends Component {
 
     const file = ev.target.files[0];
     
-    if (file) {
+    if (file && file.type === "text/html") {
       console.log("got a file --> ", file);
-        const r = new FileReader();
 
-        r.onload = function (e) {
-          const contents = e.target.result;
-          // document.getElementById("ReadResult").innerHTML = contents;
-          console.log("Got contents of file --> ", contents);
-        }
+      const r = new FileReader();
 
-        r.readAsText(file);
+      r.onload = (e) => {
+        const contents = e.target.result;
+        // document.getElementById("ReadResult").innerHTML = contents;
+        console.log("Got contents of file --> ", contents);
+        this.setEditMode(true);
+        this.setInnerHTMLOfEditor(contents);
+      }
+
+      r.readAsText(file);
     } else {
-        alert("Failed to load file");
+        alert("Failed to load, please select a HTML file.");
     }
 
   }
