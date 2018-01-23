@@ -57,7 +57,7 @@ class CreatePost extends Component {
 
         <div onClick={() => this.setEditMode(true)} className="create-post-btn non-selectable-action">Create New Post</div>
         <span> - OR - </span>
-        <div onClick={() => this.openFilePicker()} className="create-post-btn non-selectable-action">Import a File</div>
+        <div onClick={() => this.openFilePicker()} className="create-post-btn non-selectable-action">Import a HTML File</div>
         <input id="fileInput" type="file" accept="text/html" onChange={(event) => this.readFiles(event)} />
 
       </div>
